@@ -1,0 +1,51 @@
+{
+  "_comments": {
+    "a": "settings reference: https://code.claude.com/docs/en/settings-reference",
+    "b": "allow/deny hell reference: https://ofox.ai/blog/claude-code-safety-prevent-accidental-file-deletion/"
+  },
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",  
+  "model": "claude-opus-4-8",
+  "feedbackSurveyRate" : 0,
+  "autoMemoryEnabled": false,
+  "autoMemoryDirectory": "./.claude/memory",
+  "cleanupPeriodDays": 1000,
+  "tui":"default",
+  "env": {
+    "BLAH_SOME_VAR": "1"
+  },
+  "permissions": {
+    "defaultMode": "auto",
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(unlink:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
+      "Bash(git:*)",
+      "Bash(dd:*)",
+      "Bash(mkfs:*)",
+      "Bash(* > /dev/sda*)",
+      "Read(~/.ssh/**)",
+      "Read(**/.env)",
+      "Edit(**/.env)",
+      "Edit(.git/**)"
+    ]
+  },
+  "sandbox": {
+    "enabled": false,
+    "failIfUnavailable": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "filesystem": {
+      "denyRead": ["/Users", "/Volumes"],
+      "denyWrite": ["/Users", "/Volumes"],
+      "allowRead": ["~/.claude"]
+    },
+    "network": {
+      "allowedDomains": ["*", "127.0.0.1", "localhost", "192.168.64.1"],
+      "allowAllUnixSockets": true,
+      "allowLocalBinding": true
+    }
+  }
+}
+
+

@@ -136,7 +136,9 @@ function run_backup_job {
 	my_rsync ${RSYNC_ARGS} "${MY_USER_HOME}/Library/Application Support/MobileSync/" "${TARGET_DIR}/MobileSync/"
 
 	#md5tool.sh CREATE "/Applications/Wine"
-	#my_rsync ${RSYNC_ARGS} "/Applications/Wine" "${TARGET_DIR}/wine/"			
+	#my_rsync ${RSYNC_ARGS} "/Applications/Wine" "${TARGET_DIR}/wine/"
+
+	date >> "${TARGET_DIR}/backupdate.txt"			
 }
 
 # arg 1 is target drive
@@ -147,6 +149,12 @@ function backup_music {
 		echo "Not backing up music, can't find expected local music dir: ${LOCAL_MUSIC_FOLDER}"
 		return
 	fi
+
+	echo "NOT BACKING UP MUSIC, FIX THIS WHEN MUSIC IS BACK ON HARD DRIVE!!!!!!"
+	echo "NOT BACKING UP MUSIC, FIX THIS WHEN MUSIC IS BACK ON HARD DRIVE!!!!!!"
+	echo "NOT BACKING UP MUSIC, FIX THIS WHEN MUSIC IS BACK ON HARD DRIVE!!!!!!"
+	echo "NOT BACKING UP MUSIC, FIX THIS WHEN MUSIC IS BACK ON HARD DRIVE!!!!!!"
+	return
 
 	if [ -e "${1}/Music" ]; then
 		TARGET_MUSIC_FOLDER="${1}/Music"
@@ -256,7 +264,7 @@ if [ "${FLAG_BACKUP_LOCAL}" = "true" ]; then
 	brew leaves > "${MISC_FOLDER}/brewlist.txt"
 	defaults read /Library/Preferences/com.apple.TimeMachine SkipPaths > "${MISC_FOLDER}/timemachine_excludes.txt"
 	find /Applications -maxdepth 1 | sort > "${MISC_FOLDER}/apps.txt"
-	date > "${LOCAL_RSYNC_TARGET_DIR}/backupdate.txt"
+	date >> "${LOCAL_RSYNC_TARGET_DIR}/backupdate.txt"
 
 	echo "backing up code"
 	my_rsync "${MY_USER_HOME}/Documents/code" "${LOCAL_RSYNC_TARGET_DIR}/"
